@@ -1,5 +1,3 @@
-# emetteur_objet.py (Version Humain sur grille 16x16)
-# CE SCRIPT EST DÉJÀ CORRECT - AUCUN CHANGEMENT NÉCESSAIRE
 import time, os, random, sys, math
 FIFO_PATH, GRID_SIZE, CASE_SIZE_M, DELAY_BETWEEN_STEPS, SIMULATION_STEPS = "sae24_signal_pipe", 16, 0.5, 1.0, 300
 MICROS_POS, K_FACTOR = { 1: (0.25, 0.25), 2: (0.25, 7.75), 3: (7.75, 7.75) }, 1000.0
