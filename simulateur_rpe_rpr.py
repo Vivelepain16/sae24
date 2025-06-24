@@ -14,16 +14,6 @@ NUM_BITS = 10
 MAX_AMPLITUDE = 5000.0 
 
 def amplitude_to_bits(amplitude):
-    """
-    Simulate ADC conversion + FSK preparation
-    Converts analog amplitude value to digital bit string
-    
-    Args:
-        amplitude (float): Analog amplitude value
-    
-    Returns:
-        str: Binary string representation (10 bits)
-    """
     # Clamp amplitude to be between 0 and MAX_AMPLITUDE
     amplitude = max(0, min(amplitude, MAX_AMPLITUDE))
     
@@ -35,9 +25,6 @@ def amplitude_to_bits(amplitude):
     return format(value_on_10_bits, f'0{NUM_BITS}b')
 
 def main():
-    """
-    Main function: Connect to MQTT broker and process amplitude data from FIFO
-    """
     # Connect to MQTT broker
     client = mqtt.Client(client_id="simulateur_rpr")
     
