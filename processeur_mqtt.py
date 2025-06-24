@@ -35,16 +35,7 @@ NUM_BITS = 10
 MAX_AMPLITUDE = 5000.0
 
 def bits_to_amplitude(bits_string):
-    """
-    Convert a binary string to amplitude value
-    Simulates the reverse of ADC + FSK decoding process
     
-    Args:
-        bits_string (str): Binary string representation of amplitude
-    
-    Returns:
-        float: Decoded amplitude value
-    """
     value_on_10_bits = int(bits_string, 2)  # Convert binary to integer
     return (value_on_10_bits / (2**NUM_BITS - 1)) * MAX_AMPLITUDE
 
@@ -52,10 +43,7 @@ def bits_to_amplitude(bits_string):
 amplitude_map = {}  # Global cache for precomputed amplitude values
 
 def precompute_amplitude_map():
-    """
-    Precompute expected amplitudes for each grid position and microphone combination
-    This creates a lookup table for fast position estimation
-    """
+    
     print("Precomputing amplitude map...")
     
     for i in range(GRID_SIZE):
@@ -80,16 +68,6 @@ def precompute_amplitude_map():
     print(f"Amplitude map precomputed with {len(amplitude_map)} points.")
 
 def find_closest_position(received_amplitudes):
-    """
-    Find the grid position that best matches the received amplitude pattern
-    Uses least squares method to find best fit
-    
-    Args:
-        received_amplitudes (dict): Dictionary with mic_id as key and amplitude as value
-    
-    Returns:
-        tuple: (x, y) coordinates of best matching position
-    """
     # Convert received amplitudes to ordered list
     amps = [received_amplitudes.get(1,0), received_amplitudes.get(2,0), received_amplitudes.get(3,0)]
     
@@ -108,16 +86,7 @@ def find_closest_position(received_amplitudes):
 
 # --- NEW CRUCIAL FUNCTION ---
 def snap_to_grid(position):
-    """
-    Snap a position (x, y) to the center of the nearest grid cell
-    This implements "grid magnetism" to correct positioning errors
-    
-    Args:
-        position (tuple): (x, y) coordinates in meters
-    
-    Returns:
-        tuple: (x, y) coordinates snapped to grid center
-    """
+
     if not position:
         return None
     
@@ -133,13 +102,7 @@ def snap_to_grid(position):
     return (snapped_x, snapped_y)
 
 def save_position_to_db(position, db_connection):
-    """
-    Save a position to the database with current timestamp
-    
-    Args:
-        position (tuple): (x, y) coordinates to save
-        db_connection: MySQL database connection object
-    """
+    # Save a position to the database with current timestamp
     if not position: 
         return
     
@@ -169,10 +132,6 @@ def on_connect(client, userdata, flags, rc):
         print(f"MQTT connection failed, return code: {rc}")
 
 def on_message(client, userdata, msg):
-    """
-    Callback for when an MQTT message is received
-    Processes amplitude data and estimates position when all microphones have reported
-    """
     db_connection = userdata['db_connection']
     
     try:
@@ -210,9 +169,7 @@ def on_message(client, userdata, msg):
         print(f"Message processing error: {e}")
 
 def main():
-    """
-    Main function: Initialize system and start MQTT processing loop
-    """
+    # Initialize system and start MQTT processing loop
     # Precompute amplitude lookup table
     precompute_amplitude_map()
     
