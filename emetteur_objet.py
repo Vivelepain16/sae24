@@ -18,28 +18,23 @@ K_FACTOR = 1000.0                     # Amplitude scaling factor
 CHANCE_TO_CONTINUE_DIRECTION = 0.75   # 75% chance to continue straight
 
 def calculate_distance(p1, p2):
-    """Calculate Euclidean distance between two points"""
+    # Calculate Euclidean distance between two points
     return math.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)
 
 def calculate_amplitude(src_pos, mic_pos):
-    """Calculate signal amplitude using inverse square law"""
+    # Calculate signal amplitude using inverse square law
     dist = calculate_distance(src_pos, mic_pos)
     # Avoid division by zero with minimum distance of 0.1m
     return K_FACTOR / (dist**2) if dist > 0.1 else K_FACTOR / (0.1**2)
 
 def grid_to_meters(i, j):
-    """Convert grid coordinates to real-world meters
-    Centers position in the middle of each grid cell"""
+    # Convert grid coordinates to real-world meters 
+    # Centers position in the middle of each grid cell
     x = i * CASE_SIZE_M + (CASE_SIZE_M / 2)
     y = j * CASE_SIZE_M + (CASE_SIZE_M / 2)
     return (x, y)
 
 def get_next_human_like_pos(current_i, current_j, last_move):
-    """Generate next position with human-like movement patterns
-    - Prefers continuing in same direction (75% chance)
-    - Supports both straight and diagonal movement
-    - Ensures movement stays within grid boundaries"""
-    
     # Define possible movement directions
     straight_moves = [(1, 0), (-1, 0), (0, 1), (0, -1)]      # 4 cardinal directions
     diagonal_moves = [(1, 1), (-1, 1), (1, -1), (-1, -1)]    # 4 diagonal directions
@@ -64,7 +59,6 @@ def get_next_human_like_pos(current_i, current_j, last_move):
     return (next_i, next_j), chosen_move
 
 def main():
-    """Main simulation loop"""
     print("Émetteur (Humain 16x16) prêt. En attente...")
     
     try:
