@@ -1,15 +1,14 @@
-/* style.css */
-
-/* --- Variables et Style Général --- */
 :root {
+    /* Color scheme for professional interface */
     --primary-color: #2c3e50;
     --secondary-color: #3498db;
     --background-color: #ecf0f1;
-    --light-gray: #bdc3c7;
-    --dark-gray: #7f8c8d;
+    --light-gray: #bdc3c7;       
+    --dark-gray: #7f8c8d;   
     --accent-color: #e74c3c;
 }
 
+/* Main body styling with flexbox layout */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--background-color);
@@ -21,14 +20,14 @@ body {
     align-items: center;
 }
 
-/* --- En-tête et Titres --- */
+/* --- Header and Title Styling --- */
 header {
     width: 100%;
     background-color: var(--primary-color);
     color: white;
     padding: 20px 0;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Subtle shadow */
 }
 
 header h1 {
@@ -42,21 +41,21 @@ header p {
     color: var(--light-gray);
 }
 
-/* --- Conteneur Principal --- */
+/* --- Main Container Layout --- */
 .main-container {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap;           /* Responsive wrapping */
     justify-content: center;
-    gap: 40px;
+    gap: 40px;                 /* Space between sections */
     padding: 40px 20px;
     max-width: 1200px;
     width: 100%;
 }
 
-/* --- Carte de la Pièce --- */
+/* --- Room Map Section --- */
 .map-section {
-    flex: 2;
-    min-width: 640px;
+    flex: 2;                   /* Takes 2/3 of available space */
+    min-width: 640px;          /* Minimum width for map visibility */
 }
 
 h2 {
@@ -65,40 +64,46 @@ h2 {
     margin-bottom: 20px;
 }
 
+/* Room visualization container */
 #room-container {
     position: relative;
-    width: 640px;
+    width: 640px;              /* 16 * 40px = 640px */
     height: 640px;
     border: 2px solid var(--dark-gray);
     background-color: white;
+    /* Grid pattern background */
     background-image:
         linear-gradient(rgba(0,0,0,.1) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0,0,0,.1) 1px, transparent 1px);
-    background-size: 40px 40px; /* 640px / 16 cases */
+    background-size: 40px 40px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
+/* Common styling for microphones and tracking points */
 .mic, .object-point {
     position: absolute;
     border-radius: 50%;
-    transform: translate(-50%, -50%); /* Centrer l'élément */
+    transform: translate(-50%, -50%); /* Center the element */
 }
 
+/* Microphone styling */
 .mic {
     width: 20px;
     height: 20px;
     background-color: var(--secondary-color);
     border: 2px solid white;
-    box-shadow: 0 0 5px var(--secondary-color);
+    box-shadow: 0 0 5px var(--secondary-color);  /* Glow effect */
 }
 
+/* Object tracking points */
 .object-point {
     width: 10px;
     height: 10px;
     background-color: var(--accent-color);
-    transition: all 0.5s ease;
+    transition: all 0.5s ease;  /* Smooth animation for movement */
 }
 
+/* Current position highlighting */
 .current-point {
     background-color: #c0392b;
     opacity: 1;
@@ -108,12 +113,13 @@ h2 {
     box-shadow: 0 0 8px #c0392b;
 }
 
-/* --- Section du Tableau --- */
+/* --- Data Table Section --- */
 .data-section {
-    flex: 1;
+    flex: 1;                    /* Takes 1/3 of available space */
     min-width: 300px;
 }
 
+/* Position data table styling */
 #positions-table {
     width: 100%;
     border-collapse: collapse;
@@ -126,16 +132,19 @@ h2 {
     border-bottom: 1px solid var(--light-gray);
 }
 
+/* Table header styling */
 #positions-table thead th {
     background-color: var(--primary-color);
     color: white;
     font-weight: 600;
 }
 
+/* Alternating row colors */
 #positions-table tbody tr:nth-child(even) {
     background-color: #f8f9fa;
 }
 
+/* Hover effect for table rows */
 #positions-table tbody tr:hover {
     background-color: #e9ecef;
 }
